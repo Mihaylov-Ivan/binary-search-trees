@@ -36,17 +36,15 @@ class Tree
         mid = ((array.length())/2).round()
 
         node.left = Node.new(array[mid])
-        if mid >=2
+        if array.length() >3
             balance_left(array[0..(mid-1)], node.left)
             balance_right(array[(mid+1)..array.length], node.left)
-        elsif mid == 1
+        elsif array.length() == 3
             node.left.left = Node.new(array[0])
             node.left.right = Node.new(array[2])
         else
             node.left.left = Node.new(array[0])
         end
-        # mid > 1 ? balance_left(array[0..(mid-1)], node.left) : node.left.left = Node.new(array[0])
-        # mid > 1 ? balance_right(array[(mid+1)..array.length], node.left) : node.left.right = Node.new(array[0])
     end
 
     def balance_right(array, node)
@@ -56,14 +54,11 @@ class Tree
         if array.length() >3
             balance_left(array[0..(mid-1)], node.right)
             balance_right(array[(mid+1)..array.length], node.right)
-        elsif mid == 3
+        elsif array.length() == 3
             node.right.left = Node.new(array[0])
             node.right.right = Node.new(array[2])
         else
             node.right.left = Node.new(array[0])
         end
-        # node.right = Node.new(array[mid])
-        # mid > 1 ? balance_left(array[0..(mid-1)], node.right) : node.right.left = Node.new(array[0])
-        # mid > 1 ? balance_right(array[(mid+1)..array.length], node.right) : node.right.right = Node.new(array[0])
     end
 end
