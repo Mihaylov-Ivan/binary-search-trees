@@ -26,7 +26,7 @@ class Tree
 
     def delete(value, node = root)
         return node if node.nil?
-    
+
         if value < node.value
           node.left = delete(value, node.left)
         elsif value > node.value
@@ -35,7 +35,7 @@ class Tree
           # if node has one or no child
           return node.right if node.left.nil?
           return node.left if node.right.nil?
-    
+
           # if node has two children
           leftmost_node = get_leftmost(node.right)
           node.value = leftmost_node.value
@@ -60,11 +60,11 @@ class Tree
     def height(value, left_height=0, right_height=0)
         node=find(value)
         return 0 if node.left.nil? && node.right.nil?
-        
+
         left_height = 1 + height(node.left.value) unless node.left.nil?
         right_height = 1 +  height(node.right.value) unless node.right.nil?
 
-        left_height > right_height ? (return left_height) : (return right_height)        
+        left_height > right_height ? (return left_height) : (return right_height)
     end
 
     def balanced?(node=root)
@@ -72,7 +72,7 @@ class Tree
 
         node.left.nil? ? height_left=0 : height_left = height(node.left.value)
         node.right.nil? ? height_right=0 : height_right = height(node.right.value)
-        
+
         return true if (height_left-height_right).abs <= 1 && balanced?(node.left) && balanced?(node.right)
     end
 
@@ -99,7 +99,7 @@ class Tree
         if array.length==2 then
             root = Node.new(array[1])
             root.left = Node.new(array[0])
-            
+
             return root
         end
 
@@ -117,11 +117,11 @@ class Tree
         left ? array=array[0..(mid-1)] : array=array[(mid+1)..array.length]
         mid = (array.length/2).floor
         array.length%2 == 0 ? mid-=1 : mid=mid
-        
+
         current_node = Node.new(array[mid])
         left ? node.left = current_node : node.right = current_node
 
-        case array.length  
+        case array.length
         when 3
             current_node.left = Node.new(array[0])
             current_node.right = Node.new(array[2])
@@ -139,7 +139,7 @@ class Tree
         traversal<<node.value
         queue << node.left unless node.left.nil?
         queue << node.right unless node.right.nil?
-        
+
         return traversal if queue.empty?
 
         level_order(traversal, queue, queue.shift)
